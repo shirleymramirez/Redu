@@ -6,16 +6,18 @@ class SearchBar extends Component{
     constructor(props) {
         super(props);
 
+        //manually updating this.state inside constructor element
         this.state ={ term: '' };
     }
     render() {
         return (
             <div>
-            {/* whenever this is update, 'this.setState' will set a new value of our 'term' input
-            it causes our component to automatically rerender and push all those updated values into the DOM  */}
-              <input onChange={event => this.setState({ term: event.target.value })} />
+            {/* controlled formed element component - value only changes when state changes  */}
+              <input
+                value={this.state.term} 
+                onChange={event => this.setState({ term: event.target.value })} />
             </div>
-        )
+        );
     }
 }
 
