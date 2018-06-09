@@ -14,7 +14,6 @@ class SearchBar extends Component{
             {/* whenever this is update, 'this.setState' will set a new value of our 'term' input
             it causes our component to automatically rerender and push all those updated values into the DOM  */}
               <input onChange={event => this.setState({ term: event.target.value })} />
-              Value of the input: {this.state.term}
             </div>
         )
     }
