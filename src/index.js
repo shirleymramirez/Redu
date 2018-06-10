@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import YTSearch from 'youtube-api-search';
 import SearchBar from './components/search_bar';
+import VideoList from './components/video_list';
 const API_KEY = "AIzaSyA_A87KhTJlWXKOadXwDVPDckE1_pWAb-I";
 
 class App extends Component {
@@ -11,8 +12,8 @@ class App extends Component {
         this.state = { videos: [] };
 
         YTSearch({ key: API_KEY, term: "surfboards" }, (videos) => {
-            this.setSate({ videos });
-            //this.setState({ videos: videos})
+            this.setState({ videos });
+            // this.setState({ videos: videos})
             //in ES6, when key and value are the same can be optimized as the above
         });
     }
@@ -20,6 +21,8 @@ class App extends Component {
     return (
         <div>
             <SearchBar />
+            {/* passing data as props from parent(app) to child Videolist */}
+            <VideoList videos={this.state.videos}/>
         </div>
     );
   }
