@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import YTSearch from 'youtube-api-search';
 import SearchBar from './components/search_bar';
 import VideoList from './components/video_list';
+import VideoDetail from './components/video_details';
 const API_KEY = "AIzaSyA_A87KhTJlWXKOadXwDVPDckE1_pWAb-I";
 
 class App extends Component {
@@ -21,6 +22,7 @@ class App extends Component {
     return (
         <div>
             <SearchBar />
+            <VideoDetail video={this.state.videos[0]}/>
             {/* passing data as props from parent(app) to child Videolist */}
             <VideoList videos={this.state.videos}/>
         </div>
