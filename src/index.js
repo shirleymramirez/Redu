@@ -14,21 +14,24 @@ class App extends Component {
             videos: [],
             selectedVideo: null 
         };
+        this.videoSearch('cats');
+    }
 
-        YTSearch({ key: API_KEY, term: "cats" }, (videos) => {
-            this.setState({ 
-                videos: videos, 
-                selectedVideo: videos[0]
-             });
-            // this.setState({ videos: videos})
-            //in ES6, when key and value are the same can be optimized as the above
+    videoSearch(term) {
+        YTSearch({ key: API_KEY, term: term }, videos => {
+          this.setState({ 
+              videos: videos, 
+              selectedVideo: videos[0] 
+            });
+          // this.setState({ videos: videos})
+          //in ES6, when key and value are the same can be optimized as the above
         });
     }
 
   render() {
     return (
         <div>
-            <SearchBar />
+            <SearchBar onSearchTermChange={term => this.videoSearch(term)}/>
             <VideoDetail video={this.state.selectedVideo} />
             {/* passing data as props from parent(app) to child Videolist */}
             <VideoList 

@@ -15,9 +15,14 @@ class SearchBar extends Component{
             {/* controlled formed element component - value only changes when state changes  */}
               <input
                 value={this.state.term} 
-                onChange={event => this.setState({ term: event.target.value })} />
+                onChange={event => this.onInputChange(event.target.value)} />
             </div>
         );
+    }
+
+    onInputChange(term) {
+        this.setState({term});
+        this.props.onSearchTermChange(term);
     }
 }
 
