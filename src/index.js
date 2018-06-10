@@ -10,21 +10,30 @@ class App extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { videos: [] };
+        this.state = { 
+            videos: [],
+            selectedVideo: null 
+        };
 
-        YTSearch({ key: API_KEY, term: "surfboards" }, (videos) => {
-            this.setState({ videos });
+        YTSearch({ key: API_KEY, term: "cats" }, (videos) => {
+            this.setState({ 
+                videos: videos, 
+                selectedVideo: videos[0]
+             });
             // this.setState({ videos: videos})
             //in ES6, when key and value are the same can be optimized as the above
         });
     }
+
   render() {
     return (
         <div>
             <SearchBar />
-            <VideoDetail video={this.state.videos[0]}/>
+            <VideoDetail video={this.state.selectedVideo} />
             {/* passing data as props from parent(app) to child Videolist */}
-            <VideoList videos={this.state.videos}/>
+            <VideoList 
+                onVideoSelect={ selectedVideo => this.setState({selectedVideo}) }
+                videos={this.state.videos} />
         </div>
     );
   }

@@ -4,7 +4,12 @@ import VideoListItem from './video_list_item';
 //props here is an argument because it is a functional component
 const VideoList = (props) => {
    const videoItems = props.videos.map((video) => {
-        return <VideoListItem key={video.etag} video={video} />
+        return (
+            <VideoListItem 
+                onVideoSelect={props.onVideoSelect}
+                key={video.etag} 
+                video={video} />
+        );
     });
 
     return ( 
