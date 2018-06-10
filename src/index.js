@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import YTSearch from 'youtube-api-search';
@@ -29,17 +30,22 @@ class App extends Component {
     }
 
   render() {
-    return (
-        <div>
-            <SearchBar onSearchTermChange={term => this.videoSearch(term)}/>
-            <VideoDetail video={this.state.selectedVideo} />
-            {/* passing data as props from parent(app) to child Videolist */}
-            <VideoList 
-                onVideoSelect={ selectedVideo => this.setState({selectedVideo}) }
-                videos={this.state.videos} />
-        </div>
-    );
-  }
+             // created an fat arrow function and passed it to debounce
+             // debounce does is it takes the inner function "((term) => { this.videoSearch(term) }"
+             // and can be callled once every 300 milliseconds
+             const videoSearch = _.debounce(term => {
+               this.videoSearch(term);
+             }, 300);
+
+             return <div>
+                 <SearchBar onSearchTermChange={term => this.videoSearch(term)} />
+                 <VideoDetail video={this.state.selectedVideo} />
+                 {/* passing data as props from parent(app) to child Videolist */}
+                 <VideoList onVideoSelect={selectedVideo => this.setState(
+                       { selectedVideo }
+                     )} videos={this.state.videos} />
+               </div>;
+           }
 }
 
 //Take this component's generated HTML and put it on the page (in the DOM)
